@@ -32,19 +32,31 @@ const timeoutObjs = batchTimeouts(tasks, delays);
 console.log(timeoutObjs); // [ Timeout {...},  Timeout {...}, Timeout {...} ]
 ***********************************************************************/
 
+// function batchTimeouts(callbacks, delays) {
+//  let arr = []
+//  for (let i = 0; i < callbacks.length; i ++){
+//   let cb = callbacks[i]
+//   for (let j = 0; j < delays.length; j ++){
+//     let delay = delays[j]
+//     if (i === j){
+//       arr.push(setTimeout(cb, delay))
+//     }
+//   }
+//  }
+//  return arr
+// }
+
 function batchTimeouts(callbacks, delays) {
- let arr = []
- for (let i = 0; i < callbacks.length; i ++){
-  let cb = callbacks[i]
-  for (let j = 0; j < delays.length; j ++){
-    let delay = delays[j]
-    if (i === j){
-      arr.push(setTimeout(cb, delay))
-    }
-  }
- }
- return arr
-}
+  let arr = [];
+
+  if (callbacks.length === 0) return arr;
+
+  let timeOutObjs = setTimeout(callbacks[0], delays[0]);
+  // console.log(timeOutObjs);
+  arr.push(timeOutObjs);
+
+  return batchTimeouts(callbacks.slice(1), delays.slice(1));
+};
 
 const sayHello = () => console.log('hi');
 const sayGoodbye = () => console.log('bye');

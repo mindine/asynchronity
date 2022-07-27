@@ -27,6 +27,7 @@ function setSecondsTimeoutArgs(cb, delayInSeconds, ...args) {
   return setTimeout(cb, delayInSeconds * 1000, ...args);
 }
 
+
 function printSum(num1, num2, num3) {
   console.log(num1 + num2 + num3);
 }
